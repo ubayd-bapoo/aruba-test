@@ -55,5 +55,5 @@ docker build -t aruba-test .
 Once the Docker image is built successfully, you can run the Python application within 
 a Docker container:
 ```bash
-docker run -p 8000:8000
+docker run -p 8000:8000 aruba-test
 ```
