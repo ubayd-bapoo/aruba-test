@@ -9,6 +9,8 @@ from service_app.models.access_point import AccessPoint
 
 
 router = APIRouter()
+
+# All variable that only needs to be called once
 URL = 'https://www.googleapis.com/geolocation/v1/geolocate'
 HEADERS = {
     'Content-Type': 'application/json',
