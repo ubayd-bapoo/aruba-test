@@ -11,7 +11,7 @@ guide assumes you have Docker installed on your system and a basic understanding
 - [Running the Dockerized Application](#5-running-the-dockerized-application)
 - [Environment Variables](#6-environment-variables)
 - [Unit Test](#7-unit-test)
-- [API Documentation](#8-unit-test)
+- [API Documentation](#8-api-documentation)
 
 ### 1. Clone the Repository
 Clone the repository containing the Python application to your local machine using Git 
