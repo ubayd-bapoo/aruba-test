@@ -1,4 +1,6 @@
 import os
+import time
+import hashlib
 import logging
 import requests
 
@@ -19,6 +21,10 @@ PARAMS = {
     'key': os.environ.get('KEY'),
 }
 
+# Define the cache data structure
+CACHE = {}
+CACHE_EXPIRY_TIME = 5 * 60  # 15 minutes in seconds, we expire the cache without needing to restart the service
+
 
 @router.post("/api/v1/geolocation/",
              tags=["Geolocation"],
@@ -38,6 +44,7 @@ def read_root(access_points: list[AccessPoint]):
       "wifiAccessPoints": []
     }
 
+    bssids = set()
     for ap in access_points:
         data["wifiAccessPoints"].append({
             "macAddress": ap.bssid,
@@ -45,6 +52,19 @@ def read_root(access_points: list[AccessPoint]):
             "signalToNoiseRatio": 0,
             "channel": ap.channel,
         })
+        bssids.add(ap.bssid)
+
+    # Keeping the set sorted so that we always get the same key, when we get the same access_points in a different order
+    unique_key = hashlib.sha256(''.join(sorted(bssids)).encode()).hexdigest()
+    if unique_key in CACHE:
+        logging.info('Retrieved from cache')
+        cached_result, timestamp = CACHE[unique_key]
+        current_time = time.time()
+
+        # Check if the cache entry is still valid
+        if current_time - timestamp <= CACHE_EXPIRY_TIME:
+            return cached_result
+        logging.info('Cache expired')
 
     logging.info('Sending request to Google')
     response = requests.post(URL, params=PARAMS, headers=HEADERS, json=data)
@@ -56,4 +76,6 @@ def read_root(access_points: list[AccessPoint]):
             content={"error": "Custom Error",
                      "detail": f"Error with response to Google: {clean_json['message']}"},
         )
+
+    CACHE[unique_key] = (response.json(), time.time())
     return response.json()
