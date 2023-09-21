@@ -9,6 +9,7 @@ guide assumes you have Docker installed on your system and a basic understanding
 - [Running the Python Application Locally](#3-running-the-python-application-locally)
 - [Building the Docker Image](#4-building-the-docker-image)
 - [Running the Dockerized Application](#5-running-the-dockerized-application)
+- [Environment Variables](#6-environment-variables)
 
 ### 1. Clone the Repository
 Clone the repository containing the Python application to your local machine using Git 
@@ -57,3 +58,11 @@ a Docker container:
 ```bash
 docker run -p 8000:8000 aruba-test
 ```
+
+### 6. Environment Variables
+To run this application, you'll need to set up some environment variables. These variables
+ are used to configure various aspects of the application. Here's a list of the required 
+ environment variables and their descriptions:
+ 1. **KEY**: To access external APIs, you'll need to obtain an API key and set it as 
+ the `KEY` environment variable.
+
