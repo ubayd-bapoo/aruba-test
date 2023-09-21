@@ -10,7 +10,8 @@ guide assumes you have Docker installed on your system and a basic understanding
 - [Building the Docker Image](#4-building-the-docker-image)
 - [Running the Dockerized Application](#5-running-the-dockerized-application)
 - [Environment Variables](#6-environment-variables)
-- [Unit Test](#6-environment-variables)
+- [Unit Test](#7-unit-test)
+- [API Documentation](#8-unit-test)
 
 ### 1. Clone the Repository
 Clone the repository containing the Python application to your local machine using Git 
@@ -91,3 +92,26 @@ repository. If there are any issues with the tests, you will be notified.
 
 By leveraging GitHub Actions, we ensure that our codebase remains reliable and that new
  contributions are thoroughly tested before being merged into the main branch.
+
+### 8. API Documentation
+The API documentation is powered by FastAPI's built-in Swagger integration. This interactive documentation makes it 
+easy to explore and understand the API endpoints.
+- **Access API Documentation**: To explore our API documentation and test the endpoints 
+interactively, simply visit [Swagger UI](http://localhost:8000/docs) (http://localhost:8000/docs) when the application
+ is running locally.
+
+- **Automatic Documentation**: We've designed our API using FastAPI, which automatically
+ generates documentation based on the code, including request and response models and 
+ descriptions.
+
+FastAPI's Swagger UI provides a user-friendly way to understand and use our API. You can
+ interact with the available endpoints, view request and response models, and even make
+  test requests right from the documentation.
+
+Feel free to dive into the documentation to get a better understanding of how to use our
+ API effectively.
+
+![FastAPI Swagger UI](https://fastapi.tiangolo.com/img/tutorial/tutorial-02-swagger-ui.png)
+
+Note: In a production environment, replace `http://localhost:8000/docs` with the actual
+ URL where your API is hosted.

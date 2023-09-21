@@ -5,7 +5,7 @@ import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from service_app.models.access_point import AccessPoint
+from service_app.models.access_point import AccessPoint, Response
 
 
 router = APIRouter()
@@ -20,7 +20,11 @@ PARAMS = {
 }
 
 
-@router.post("/api/v1/geolocation/")
+@router.post("/api/v1/geolocation/",
+             tags=["Geolocation"],
+             description="This endpoint is used to received a list of access points to be sent to Google.",
+             response_model=Response
+             )
 def read_root(access_points: list[AccessPoint]):
     if len(access_points) < 2:
         # Per Googles docs https://developers.google.com/maps/documentation/geolocation/intro

@@ -13,3 +13,13 @@ class AccessPoint(BaseModel):
     timestamp: float
     vendor: str
     width: int
+
+
+class GeoLocation(BaseModel):
+    lat: float
+    lng: float
+
+
+class Response(BaseModel):
+    location: GeoLocation
+    accuracy: float
