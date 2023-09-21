@@ -10,6 +10,7 @@ guide assumes you have Docker installed on your system and a basic understanding
 - [Building the Docker Image](#4-building-the-docker-image)
 - [Running the Dockerized Application](#5-running-the-dockerized-application)
 - [Environment Variables](#6-environment-variables)
+- [Unit Test](#6-environment-variables)
 
 ### 1. Clone the Repository
 Clone the repository containing the Python application to your local machine using Git 
@@ -66,3 +67,27 @@ To run this application, you'll need to set up some environment variables. These
  1. **KEY**: To access external APIs, you'll need to obtain an API key and set it as 
  the `KEY` environment variable.
 
+### 7. Unit Test
+To run the unit tests for this application, follow these steps:
+```bash
+   pytest unit_tests.py
+```
+#### Automated Testing with GitHub Actions
+
+I have set up a GitHub Actions workflow that automatically runs pytest for our unit tests
+ whenever changes are pushed to the repository's `main` branch. This ensures that our code
+  is continuously tested for correctness.
+
+The workflow configuration can be found in the [`.github/workflows/python-app.yml`](.github/workflows/python-app.yml) file. Here's how it works:
+
+- Whenever you push changes to the `main` branch, GitHub Actions will automatically 
+trigger the workflow.
+- The workflow will use the `pytest` command to execute the tests defined in the 
+`unit_tests.py` file.
+- The results of the tests will be displayed in the GitHub Actions logs.
+
+You can always check the status of the tests by visiting the "Actions" tab in this 
+repository. If there are any issues with the tests, you will be notified.
+
+By leveraging GitHub Actions, we ensure that our codebase remains reliable and that new
+ contributions are thoroughly tested before being merged into the main branch.
